@@ -7,7 +7,6 @@ on: [pull_request, push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -28,4 +27,12 @@ jobs:
 
     - name: Execute Tests
       run: mvn test
+
+    - name: Build docker image and push
+      uses: mr-smithers-excellent/docker-build-push@v6
+      with:
+        image: victorlimaf55036/mandacaru
+        registry: docker.io
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
 
